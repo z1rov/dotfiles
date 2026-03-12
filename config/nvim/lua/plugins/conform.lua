@@ -1,30 +1,22 @@
 return {
-	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
-	cmd = { "ConformInfo" },
-	keys = {
-		{
-			"<leader>gf",
-			function()
-				require("conform").format({ async = true })
-			end,
-			mode = "",
-			desc = "Format buffer",
-		},
-	},
-	config = function()
-		local conform = require("conform")
-		conform.setup({
-			formatters_by_ft = {
-				lua = { "stylua" },
-				bash = { "beautysh" },
-				sh = { "beautysh" },
-				css = { "prettier" },
-				markdown = { "prettier" },
-			},
-			default_format_opts = {
-				lsp_format = "fallback",
-			},
-		})
-	end,
+    "stevearc/conform.nvim",
+    event  = { "BufWritePre" },
+    cmd    = { "ConformInfo" },
+    config = function()
+        require("conform").setup({
+            formatters_by_ft = {
+                c      = { "clang_format" },
+                cpp    = { "clang_format" },
+                python = { "black" },
+                bash   = { "shfmt" },
+                sh     = { "shfmt" },
+                rust   = { "rustfmt" },
+                lua    = { "stylua" },
+            },
+            format_on_save = {
+                timeout_ms = 500,
+                lsp_format = "fallback",
+            },
+        })
+    end,
 }

@@ -1,31 +1,9 @@
-vim.g.mapleader = " "
+vim.g.mapleader      = " "
 vim.g.maplocalleader = " "
 
-require("vim-options")
-require("keymaps")
-require("terminal")
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
-  spec = {
-    { import = "plugins" },
-  },
-  defaults = {
-    lazy = false,
-  },
-})
-
-vim.diagnostic.disable()
-
+require("core.options")
+require("core.autocmds")
+require("keymaps.base")
+require("keymaps.search")
+require("keymaps.runner")
+require("core.lazy")
