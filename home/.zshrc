@@ -16,8 +16,8 @@ zstyle ':vcs_info:git:*' actionformats '%F{220}-[%F{220} %b%F{202}*%F{220}]%f
 
 precmd_functions+=(vcs_info)
 
-PS1="%{$fg[blue]%}%B[%b%{$fg[blue]%}%n%{$fg[blue]%}%B %F{blue}✘%f %b%{$fg[blue]%}%m%{$fg[blue]%}%B]-%b%{$fg[blue]%}%B[%b%{$fg[blue]%}%~%{$fg[blue]%}%B]%b\${vcs_info_msg_0_}
-%{$fg[blue]%}%B>>>%b%{$reset_color%} "
+PS1="%{$fg[blue]%}%B[%b%{$fg[blue]%}%n %F{blue}✘%f%{$fg[blue]%} %m%{$fg[blue]%}%B]-%B[%b%{$fg[white]%}%~%{$fg[blue]%}%B]%b\${vcs_info_msg_0_}
+%{$fg[blue]%}%B$%b%{$reset_color%} "
 
 LS_COLORS="di=38;2;129;161;193:fi=38;2;216;222;233:ex=38;2;163;190;140:ln=38;2;208;135;112:so=38;2;235;203;139:pi=38;2;180;142;173:bd=38;2;191;97;106:cd=38;2;143;188;187:or=38;2;255;85;85:mi=38;2;255;0;0"
 export LS_COLORS
