@@ -44,3 +44,10 @@ ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=109,bold'
 ZSH_HIGHLIGHT_STYLES[arg]='fg=251,bold'
 
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=210,bold'
+
+# Random ASCII art on terminal start
+ASCII_DIR="$HOME/.config/ascii"
+if [ -d "$ASCII_DIR" ]; then
+  scripts=("$ASCII_DIR"/ascii_*.sh)
+  bash "${scripts[RANDOM % ${#scripts[@]} + 1]}"
+fi
