@@ -9,25 +9,30 @@ get_ip() {
 iface=$(ip -o link show | awk -F': ' '/tun0|wg0/{print $2; exit}')
 if [[ -n "$iface" ]]; then
   ipaddr=$(get_ip "$iface")
-  [[ -n "$ipaddr" ]] && echo "󰖂 $ipaddr" || echo "󰖂 VPN"
-  exit 0
+  if [[ -n "$ipaddr" ]]; then
+    echo "󰖂 $ipaddr"
+    exit 0
+  fi
 fi
 
 # Ethernet
 iface=$(ip -o link show | awk -F': ' '/enp|eth/{print $2; exit}')
 if [[ -n "$iface" ]]; then
   ipaddr=$(get_ip "$iface")
-  [[ -n "$ipaddr" ]] && echo "󰈀 $ipaddr" || echo "󰈀 ETH"
-  exit 0
+  if [[ -n "$ipaddr" ]]; then
+    echo "󰈀 $ipaddr"
+    exit 0
+  fi
 fi
 
 # WiFi
 iface=$(ip -o link show | awk -F': ' '/wlp|wlan/{print $2; exit}')
 if [[ -n "$iface" ]]; then
   ipaddr=$(get_ip "$iface")
-  [[ -n "$ipaddr" ]] && echo " $ipaddr" || echo " WIFI"
-  exit 0
+  if [[ -n "$ipaddr" ]]; then
+    echo "  $ipaddr"
+    exit 0
+  fi
 fi
 
 echo "󰖪 Offline"
-
