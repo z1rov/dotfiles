@@ -4,11 +4,11 @@
 # │        Escritorios y movimiento de ventanas  │
 # ╰──────────────────────────────────────────────╯
 
-# Cambiar a escritorio 1–5
+# Cambiar a escritorio 1–6
 super + {1-6}
     bspc desktop -f ^{1-6}
 
-# Mover ventana al escritorio 1–5
+# Mover ventana al escritorio 1–6
 super + shift + {1-6}
     bspc node -d ^{1-6}
 
@@ -16,7 +16,7 @@ super + shift + {1-6}
 # │                Aplicaciones                  │
 # ╰──────────────────────────────────────────────╯
 
-# Terminal (Normal y flotante)
+# Terminal
 super + Return
     sh -c 'cd ~ && exec kitty'
 
@@ -26,7 +26,8 @@ super + r
 
 # HTB VPN - Terminal flotante
 super + 9
-	kitty --class FloatingTerm --title "HTB VPN" --override initial_window_width=400 --override initial_window_height=300 -e ~/.config/bspwm/scripts/htb-vpn
+    kitty --class FloatingTerm --title "HTB VPN" --override initial_window_width=400 --override initial_window_height=300 -e ~/.config/bspwm/scripts/htb-vpn
+
 # ╭──────────────────────────────────────────────╮
 # │                 Capturas                     │
 # ╰──────────────────────────────────────────────╯
@@ -47,30 +48,59 @@ super + shift + s
     IMG="$DIR/img$next.png"; \
     flameshot gui -p "$IMG" && xclip -selection clipboard -t image/png -i "$IMG" && notify-send "📸 Captura guardada y copiada"'
 
-
 # ╭──────────────────────────────────────────────╮
 # │       Apagar, reiniciar, cerrar sesión       │
 # ╰──────────────────────────────────────────────╯
 
-# Apagar, reiniciar, cerrar sesión, etc.
 ctrl + super + alt + {p,r,q,l,k,s}
     {systemctl poweroff, systemctl reboot, bspc quit, ScreenLocker, xkill, SoftReload}
-
-# Música (Script)
-super + 7
-    ~/.config/bspwm/scripts/music
 
 # ╭──────────────────────────────────────────────╮
 # │      Control de brillo y volumen             │
 # ╰──────────────────────────────────────────────╯
 
-# Control de brillo
+# Música
+super + 7
+    ~/.config/bspwm/scripts/music
+
+# Brillo
 XF86MonBrightness{Up,Down}
     sh brightness {up,down}
 
-# Control de volumen
+# Volumen
 XF86Audio{RaiseVolume,LowerVolume,Mute}
     volume{ --inc, --dec, --toggle}
+
+# ╭──────────────────────────────────────────────╮
+# │           Teclas especiales (Fn keys)        │
+# ╰──────────────────────────────────────────────╯
+
+XF86AudioPlay
+    playerctl play-pause
+
+XF86AudioNext
+    playerctl next
+
+XF86AudioPrev
+    playerctl previous
+
+XF86AudioStop
+    playerctl stop
+
+XF86AudioMicMute
+    pactl set-source-mute @DEFAULT_SOURCE@ toggle && notify-send "🎤 Mic Toggle"
+
+XF86Phone
+    notify-send "📞 Botón de llamada (no asignado)"
+
+XF86Hangup
+    notify-send "📵 Colgar llamada (no asignado)"
+
+XF86WLAN
+    sh -c 'rfkill toggle wifi; notify-send "✈️  WiFi toggle"'
+
+XF86Bluetooth
+    sh -c 'rfkill toggle bluetooth; notify-send "🔵 Bluetooth toggle"'
 
 # ╭──────────────────────────────────────────────╮
 # │                 BSPWM Core                   │
@@ -80,7 +110,11 @@ XF86Audio{RaiseVolume,LowerVolume,Mute}
 super + alt + r
     bspc wm -r
 
-# Cerrar/Killear nodo
+# Recargar sxhkd
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# Cerrar nodo
 super + x
     bspc node -c
 
@@ -88,21 +122,56 @@ super + x
 # │        Navegación y gestión de nodos         │
 # ╰──────────────────────────────────────────────╯
 
-# Rotar ventana
+# Rotar ventanas del desktop
 ctrl + Tab
     bspc node @/ --rotate {90,-90}
+
+# Rotar 90
+super + ctrl + r
+    bspc node @/ --rotate 90
 
 # Cambiar de escritorio (prev/next)
 super + {Left,Right}
     bspc desktop -f {prev,next}
 
+# Toggle fullscreen / monocle
+super + f
+    bspc desktop -l next
+
 # ╭──────────────────────────────────────────────╮
 # │          Menú de aplicaciones (Rofi)         │
 # ╰──────────────────────────────────────────────╯
 
-# Abrir menú de aplicaciones con Rofi
 super + d
     rofi -show drun -theme $HOME/.config/rofi/config.rasi
+
+# ╭──────────────────────────────────────────────╮
+# │     Resize dinámico (sin bug de bloqueo)     │
+# ╰──────────────────────────────────────────────╯
+
+alt + Left
+    bspc node -z right -20 0 || bspc node -z left -20 0
+
+alt + Right
+    bspc node -z right 20 0 || bspc node -z left 20 0
+
+alt + Up
+    bspc node -z bottom 0 -20 || bspc node -z top 0 -20
+
+alt + Down
+    bspc node -z bottom 0 20 || bspc node -z top 0 20
+
+# ╭──────────────────────────────────────────────╮
+# │         Preselect split (sin bloqueo)        │
+# ╰──────────────────────────────────────────────╯
+
+# Preseleccionar dirección y cancelar
+super + ctrl + {h,v,q}
+    bspc node -p {east,south,cancel}
+
+# Cambiar ratio del split
+super + ctrl + {h,l}
+    bspc node @parent -r {-0.1,+0.1}
 
 # ╭──────────────────────────────────────────────╮
 # │     Funciones múltiples para ventanas        │
@@ -111,43 +180,3 @@ super + d
 # Cerrar todas las ventanas del escritorio actual
 super + ctrl + x
     bspc query -N -d | xargs -I id -n 1 bspc node id -c
-
-# ╭──────────────────────────────────────────────╮
-# │           Teclas especiales (Fn keys)        │
-# ╰──────────────────────────────────────────────╯
-
-# Play / Pause
-XF86AudioPlay
-    playerctl play-pause
-
-# Siguiente pista
-XF86AudioNext
-    playerctl next
-
-# Pista anterior
-XF86AudioPrev
-    playerctl previous
-
-# Stop
-XF86AudioStop
-    playerctl stop
-
-# Mic mute
-XF86AudioMicMute
-    pactl set-source-mute @DEFAULT_SOURCE@ toggle && notify-send "🎤 Mic Toggle"
-
-# Botón llamada (Responder)
-XF86Phone
-    notify-send "📞 Botón de llamada (no asignado)" 
-
-# Botón colgar
-XF86Hangup
-    notify-send "📵 Colgar llamada (no asignado)"
-
-# Modo avión toggle (requiere rfkill)
-XF86WLAN
-    sh -c 'rfkill toggle wifi; notify-send "✈️  WiFi toggle"'
-
-XF86Bluetooth
-    sh -c 'rfkill toggle bluetooth; notify-send "🔵 Bluetooth toggle"'
-
