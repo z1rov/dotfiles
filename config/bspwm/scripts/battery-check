@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
-BAT=$(cat /sys/class/power_supply/BAT0/capacity)
-STATUS=$(cat /sys/class/power_supply/BAT0/status)
+while true; do
+    BAT=$(cat /sys/class/power_supply/BAT0/capacity)
+    STATUS=$(cat /sys/class/power_supply/BAT0/status)
 
-if [[ "$BAT" -le 87 && "$STATUS" == "Discharging" ]]; then
-    brightnessctl set 5%
-fi
+    if [[ "$BAT" -le 10 && "$STATUS" == "Discharging" ]]; then
+        brightnessctl set 2%
+    fi
+
+    sleep 60  # revisa cada 60 segundos
+done
