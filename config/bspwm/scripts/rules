@@ -20,7 +20,7 @@ case "$class" in
         result "desktop=^3 follow=on"
         ;;
 
-    *Caido*)
+    *burp*)
         result "desktop=^4 follow=on"
         ;;
 

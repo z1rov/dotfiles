@@ -1,0 +1,13 @@
+{"timestamp":3530066,"category":"session_restore","name":"backup_can_be_loaded_session_file","extra":{"loadfail_reason":"N/A","glean_timestamp":"1774815737695","can_load":"true","path_key":"clean"}}
+{"timestamp":3530067,"category":"session_restore","name":"backup_can_be_loaded_session_file","extra":{"glean_timestamp":"1774815737695","path_key":"clean","loadfail_reason":"N/A","can_load":"true"}}
+{"timestamp":3530067,"category":"session_restore","name":"shutdown_success_session_startup","extra":{"shutdown_reason":"N/A","shutdown_ok":"false","glean_timestamp":"1774815737695"}}
+{"timestamp":3530409,"category":"webcompatreporting","name":"reason_dropdown","extra":{"setting":"required","glean_timestamp":"1774815738037"}}
+{"timestamp":3530594,"category":"nimbus_events","name":"startup_database_consistency","extra":{"total_db_count":"32","primary":"database","glean_timestamp":"1774815738222","trigger":"startup","total_store_count":"32","db_active_count":"32","store_active_count":"32"}}
+{"timestamp":3530652,"category":"jsonfile","name":"load_autofillprofiles","extra":{"glean_timestamp":"1774815738280","value":"error_notfounderror"}}
+{"timestamp":3530675,"category":"doh","name":"state_rollback","extra":{"glean_timestamp":"1774815738303","value":"null"}}
+{"timestamp":3530696,"category":"containers","name":"container_profile_loaded","extra":{"containers":"4","glean_timestamp":"1774815738324"}}
+{"timestamp":3530911,"category":"jsonfile","name":"load_logins","extra":{"value":"error_notfounderror","glean_timestamp":"1774815738539"}}
+{"timestamp":3530925,"category":"upgrade_dialog","name":"trigger_reason","extra":{"value":"not-major","glean_timestamp":"1774815738553"}}
+{"timestamp":3531111,"category":"extensions.data","name":"sync_usage_quotas","extra":{"items_over_quota":"0","backend":"rust","items_count":"5","total_size_bytes":"132","glean_timestamp":"1774815738739","addon_id":"addon@darkreader.org"}}
+{"timestamp":3531188,"category":"nimbus_events","name":"is_ready","extra":{"glean_timestamp":"1774815738816"}}
+{"timestamp":3531193,"category":"extensions.data","name":"sync_usage_quotas","extra":{"backend":"rust","total_size_bytes":"0","glean_timestamp":"1774815738821","items_count":"0","items_over_quota":"0","addon_id":"foxyproxy@eric.h.jung"}}
