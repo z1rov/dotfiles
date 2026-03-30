@@ -280,13 +280,13 @@ setup_ssh() {
 PACMAN_PKGS=(
   xorg xorg-xinit bspwm sxhkd picom feh lxdm
   kitty zsh tmux neovim rofi thunar gvfs
-  bat eza xclip brightnessctl pamixer 
+  bat eza xclip brightnessctl pamixer firefox
   pipewire pipewire-pulse wireplumber papirus-icon-theme
   papirus-icon-theme dunst flameshot gnome-themes-extra 
   linux linux-firmware mesa xf86-video-amdgpu polybar nodejs npm
 )
 
-YAY_PKGS=( firefox-esr-bin i3lock-color )
+YAY_PKGS=( i3lock-color )
 
 # ============================================================
 # MAIN
