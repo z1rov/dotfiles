@@ -1,8 +1,10 @@
 # z1rov's BSPWM Rice
 
+
+https://github.com/user-attachments/assets/cc516abf-3110-4844-ba96-3ad0448fd69f
+
 <div align = center>
 
-![z1rov-dotfiles](media/main_screenshot.png)
 
 &ensp;[<kbd> <br> Install <br> </kbd>](#-installation)&ensp;
 &ensp;[<kbd> <br> Features <br> </kbd>](#-features)&ensp;
@@ -10,9 +12,6 @@
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#very-useful-keybindings-to-know)&ensp;
 &ensp;[<kbd> <br> Installer in Action <br> </kbd>](#-installer-in-action)&ensp;
 <br><br><br></div>
-
-https://github.com/user-attachments/assets/cc516abf-3110-4844-ba96-3ad0448fd69f
-
 <br>
 
 ## 👤 Welcome
