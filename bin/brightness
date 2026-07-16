@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+# Author: z1rov
+
+STEP=5
+LIMIT=2
+NOTIFY_ID=5555
+
+get_level() {
+    brightnessctl info | awk -F '[()%]' '/Current brightness/ { print $2 }'
+}
+
+notify_level() {
+    local level="$1"
+    dunstify \
+        -r "$NOTIFY_ID" \
+        -u low \
+        -t 1500 \
+        -h string:x-dunst-stack-tag:brightness \
+        "Brightness: ${level}%"
+}
+
+change_level() {
+    local level
+    level=$(get_level)
+
+    if [ -z "$level" ]; then
+        echo "Error: Could not get current brightness."
+        exit 1
+    fi
+
+    case "$1" in
+        up)
+            if [ "$level" -lt "$LIMIT" ]; then
+                brightnessctl set "${STEP}%" -q
+            else
+                brightnessctl set "${STEP}%+" -q
+            fi
+            ;;
+        down)
+            if [ "$level" -le $((LIMIT + STEP)) ]; then
+                brightnessctl set "${LIMIT}%" -q
+            else
+                brightnessctl set "${STEP}%-" -q
+            fi
+            ;;
+        *)
+            echo "Usage: $0 {up|down}"
+            exit 1
+            ;;
+    esac
+
+    notify_level "$(get_level)"
+}
+
+change_level "$1"

@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Author: z1rov
+
+notify_volume() {
+    local text="$1"
+    dunstify \
+        -r 9999 \
+        -u low \
+        -t 1500 \
+        -h string:x-dunst-stack-tag:volume \
+        -h int:transient:1 \
+        "$text"
+}
+
+show_volume() {
+    vol=$(pamixer --get-volume)
+    mute=$(pamixer --get-mute)
+
+    if [ "$mute" = "true" ] || [ "$vol" -eq 0 ]; then
+        notify_volume "[+] Muted"
+    else
+        notify_volume "[+] Volume: ${vol}%"
+    fi
+}
+
+adjust_volume() {
+    pamixer --unmute
+    pamixer --allow-boost --set-limit 150 "$@"
+    show_volume
+}
+
+toggle_mute() {
+    pamixer --toggle-mute
+    show_volume
+}
+
+case "$1" in
+    --get)    pamixer --get-volume-human ;;
+    --inc)    adjust_volume -i 5 ;;
+    --dec)    adjust_volume -d 5 ;;
+    --toggle) toggle_mute ;;
+    *)        echo "[+] $(pamixer --get-volume)%" ;;
+esac
