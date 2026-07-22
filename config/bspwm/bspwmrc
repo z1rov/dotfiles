@@ -5,11 +5,11 @@
 export XDG_CURRENT_DESKTOP='bspwm'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-
+xsetroot -cursor_name left_ptr &
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 
-bspc monitor -d I II III IV V VI
+bspc monitor -d I II III IV V VI VII VIII
 
 
 bspc config top_padding           30
@@ -52,3 +52,5 @@ polybar -c ~/.config/polybar/config.ini z1rov-bar &
 
 /usr/bin/battery-check &
 
+
+pgrep vmware-user || vmware-user &

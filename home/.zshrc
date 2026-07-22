@@ -8,16 +8,12 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source "$ZSH/oh-my-zsh.sh"
 
 autoload -Uz vcs_info
-
 zstyle ':vcs_info:*' enable git
-
-zstyle ':vcs_info:git:*' formats '%F{220}-[%F{220} %b%F{220}]%f'
-zstyle ':vcs_info:git:*' actionformats '%F{220}-[%F{220} %b%F{202}*%F{220}]%f'
-
+zstyle ':vcs_info:git:*' formats '%F{yellow} [%b]%f'
+zstyle ':vcs_info:git:*' actionformats '%F{yellow} [%b|%a]%f'
 precmd_functions+=(vcs_info)
 
-PS1="%{$fg[blue]%}%B[%b%{$fg[blue]%}%n %F{blue}✘%f%{$fg[blue]%} %m%{$fg[blue]%}%B]-%B[%b%{$fg[white]%}%~%{$fg[blue]%}%B]%b\${vcs_info_msg_0_}
-%{$fg[blue]%}%B$%b%{$reset_color%} "
+PS1='%{$fg[cyan]%}%n@%m%{$reset_color%}:%{$fg[cyan]%}%~%{$reset_color%}${vcs_info_msg_0_}\$ '
 
 LS_COLORS="di=38;2;129;161;193:fi=38;2;216;222;233:ex=38;2;163;190;140:ln=38;2;208;135;112:so=38;2;235;203;139:pi=38;2;180;142;173:bd=38;2;191;97;106:cd=38;2;143;188;187:or=38;2;255;85;85:mi=38;2;255;0;0"
 export LS_COLORS

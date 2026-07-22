@@ -1,5 +1,3 @@
-/* Author: z1rov */
-
 :root {
     --z1rov-bg: #0a0a0a;
     --z1rov-fg: #e0e0e0;
@@ -322,7 +320,6 @@ tab-split-view-wrapper .tabbrowser-tab {
 #home-button,
 #library-button,
 #bookmarks-menu-button,
-#downloads-button,
 #fxa-toolbar-menu-button,
 #save-to-pocket-button,
 #screenshot-button,
@@ -333,6 +330,11 @@ tab-split-view-wrapper .tabbrowser-tab {
 #alltabs-button,
 #search-container {
     display: none !important;
+}
+
+#downloads-button {
+    display: -moz-box !important;
+    visibility: visible !important;
 }
 
 #nav-bar-customization-target {
@@ -367,6 +369,10 @@ tab-split-view-wrapper .tabbrowser-tab {
     flex: 1 1 0 !important;
     min-width: 0 !important;
     margin-inline: 0 !important;
+}
+
+#downloads-button {
+    order: 7 !important;
 }
 
 #navigator-toolbox {
