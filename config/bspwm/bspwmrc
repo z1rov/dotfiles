@@ -35,9 +35,7 @@ bspc rule -a FloatingTerm state=floating center=true
 bspc config external_rules_command "/usr/bin/rules"
 bspc rule -a kitty:FloatingTerm state=floating center=true
 
-
-"/usr/bin/workspaces"
-"/usr/bin/targetip"
+"/usr/bin/target"
 
 pgrep -x dunst >/dev/null || dunst &
 
@@ -52,5 +50,3 @@ polybar -c ~/.config/polybar/config.ini z1rov-bar &
 
 /usr/bin/battery-check &
 
-
-pgrep vmware-user || vmware-user &
