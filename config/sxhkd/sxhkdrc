@@ -7,7 +7,7 @@ super + shift + {1-8}
 super + Return
     sh -c 'cd ~ && exec kitty'
 super + 9
-    kitty -e kon start
+    kitty -e z1 start
 super + s
     sh -c 'DIR=~/Pictures/Clipboard; mkdir -p "$DIR"; \
     n=$(ls "$DIR" 2>/dev/null | grep -Eo "^img[0-9]+\.png$" | sed "s/[^0-9]//g" | sort -n | tail -1); \
