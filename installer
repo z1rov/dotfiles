@@ -5,7 +5,7 @@ set -Eeuo pipefail
 USER_NAME="${SUDO_USER:-${USER:-$(id -un)}}"
 SUDO_FILE="/etc/sudoers.d/99_${USER_NAME}"
 DOTFILES_REPO="https://github.com/z1rov/dotfiles"
-KON_REPO="https://github.com/z1rov/kon"
+Z1_REPO="https://github.com/z1rov/z1"
 BLACKARCH_STRAP="https://blackarch.org/strap.sh"
 SELF_TARGET="/usr/bin/installer"
 REDS=("52" "88" "124" "160" "196" "203")
@@ -151,7 +151,7 @@ _usage() {
   echo -e "  \033[38;5;160m[vmware      ]\033[0m${CLR_DIM}::${CLR_RESET} configure open-vm-tools if running in VMware"
   echo -e "  \033[38;5;160m[ssh         ]\033[0m${CLR_DIM}::${CLR_RESET} generate ssh keys"
   echo -e "  \033[38;5;160m[firefox     ]\033[0m${CLR_DIM}::${CLR_RESET} pin dedicated firefox profile and load custom environment"
-  echo -e "  \033[38;5;160m[kon         ]\033[0m${CLR_DIM}::${CLR_RESET} clone and install kon"
+  echo -e "  \033[38;5;160m[z1          ]\033[0m${CLR_DIM}::${CLR_RESET} clone and install z1"
   echo -e "  \033[38;5;220m[diagnose    ]\033[0m${CLR_DIM}::${CLR_RESET} check binaries, configs and logs"
   echo -e "  \033[38;5;220m[help        ]\033[0m${CLR_DIM}::${CLR_RESET} show this help"
   _blank
@@ -911,23 +911,23 @@ _setup_firefox() {
   fi
 }
 
-_install_kon() {
-  local dir="/tmp/kon-$$"
+_install_z1() {
+  local dir="/tmp/z1-$$"
   rm -rf "$dir"
 
-  if git clone "$KON_REPO" "$dir" &>>"$LOGFILE"; then
-    _ok "kon cloned"
+  if git clone "$Z1_REPO" "$dir" &>>"$LOGFILE"; then
+    _ok "z1 cloned"
   else
-    _err "kon clone failed"
+    _err "z1 clone failed"
     return
   fi
 
   pushd "$dir" &>/dev/null || { _err "cannot enter $dir"; return; }
 
   if make install &>>"$LOGFILE"; then
-    _ok "kon installed"
+    _ok "z1 installed"
   else
-    _err "kon make install failed (log: $LOGFILE)"
+    _err "z1 make install failed (log: $LOGFILE)"
   fi
 
   popd &>/dev/null || true
@@ -1088,11 +1088,11 @@ _main() {
       _banner
       _setup_firefox
       ;;
-    kon)
+    z1)
       _require_not_root
       _banner
       _setup_sudo
-      _install_kon
+      _install_z1
       ;;
     diagnose)
       _banner
