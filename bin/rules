@@ -18,15 +18,15 @@ case "$class" in
         ;;
 
     *fire*|Navigator)
-        result "desktop=^3 follow=on"
-        ;;
-
-    *burp*)
         result "desktop=^4 follow=on"
         ;;
 
-    *obsi*)
+    *burp*)
         result "desktop=^5 follow=on"
+        ;;
+
+    *obsi*)
+        result "desktop=^7 follow=on"
         ;;
 esac
 
